@@ -1416,6 +1416,16 @@ lint-js-ci:
 jslint-ci: lint-js-ci
 	$(warning Please use lint-js-ci instead of jslint-ci)
 
+LINT_TS_TSC = test/fixtures/snapshot/tsc
+LINT_TS_CONFIG = typings/tsconfig.lint.json
+
+run-lint-ts = $(LINT_TS_TSC) --project $(LINT_TS_CONFIG)
+
+.PHONY: lint-ts
+lint-ts:
+	$(info Running TSC...)
+	@$(call available-node,$(run-lint-ts))
+
 LINT_CPP_ADDON_DOC_FILES_GLOB = test/addons/??_*/*.cc test/addons/??_*/*.h
 LINT_CPP_ADDON_DOC_FILES = $(wildcard $(LINT_CPP_ADDON_DOC_FILES_GLOB))
 LINT_CPP_EXCLUDE ?=
